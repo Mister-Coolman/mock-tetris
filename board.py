@@ -1,5 +1,5 @@
 import pygame
-import tetramino
+from tetromino import *
 
 class Board:
   def __init__(self, rows: int, cols: int) -> None:
@@ -21,6 +21,6 @@ class Board:
         count += 1
     return count
     
-  def place(self, piece: Tetramino):
+  def place(self, piece: 'Tetramino'):
     pass
     

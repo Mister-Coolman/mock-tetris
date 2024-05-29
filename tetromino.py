@@ -1,4 +1,4 @@
-import board
+from board import *
 
 """
 pieces will inherit tetramino
@@ -12,7 +12,7 @@ these classes outlined should never draw anything on the board
 """
 
 class Tetramino:
-    def __init__(self, board: Board) -> None:
+    def __init__(self, board: 'Board') -> None:
         pass
     def moveLeft(self) -> bool:
         pass
@@ -26,127 +26,7 @@ class Tetramino:
         pass
     def drop(self) -> bool:
         pass
-    def getMatrix(self) -> List[List[int]]:
+    def getMatrix(self) -> list[list[int]]:
         pass
-    def getPosition(self) -> Tuple[int, int]:
-        pass
-
-class I_piece(Tetramino):
-        def __init__(self, board: Board) -> None:
-        pass
-    def moveLeft(self) -> bool:
-        pass
-    def moveRight(self) -> bool:
-        pass
-    def moveDown(self) -> bool:
-        pass
-    def rotateClockwise(self) -> bool:
-        pass
-    def rotateCounterclockwise(self) -> bool:
-        pass
-    def drop(self) -> bool:
-        pass
-    def getMatrix(self) -> List[List[int]]:
-        pass
-    def getPosition(self) -> Tuple[int, int]:
-        pass
-
-class S_piece(Tetramino):
-    def __init__(self, board: Board) -> None:
-        pass
-    def moveLeft(self) -> bool:
-        pass
-    def moveRight(self) -> bool:
-        pass
-    def moveDown(self) -> bool:
-        pass
-    def rotateClockwise(self) -> bool:
-        pass
-    def rotateCounterclockwise(self) -> bool:
-        pass
-    def drop(self) -> bool:
-        pass
-    def getMatrix(self) -> List[List[int]]:
-        pass
-    def getPosition(self) -> Tuple[int, int]:
-        pass
-
-class Z_piece(Tetramino):
-    def __init__(self, board: Board) -> None:
-        pass
-    def moveLeft(self) -> bool:
-        pass
-    def moveRight(self) -> bool:
-        pass
-    def moveDown(self) -> bool:
-        pass
-    def rotateClockwise(self) -> bool:
-        pass
-    def rotateCounterclockwise(self) -> bool:
-        pass
-    def drop(self) -> bool:
-        pass
-    def getMatrix(self) -> List[List[int]]:
-        pass
-    def getPosition(self) -> Tuple[int, int]:
-        pass
-
-class L_piece(Tetramino):
-    def __init__(self, board: Board) -> None:
-        pass
-    def moveLeft(self) -> bool:
-        pass
-    def moveRight(self) -> bool:
-        pass
-    def moveDown(self) -> bool:
-        pass
-    def rotateClockwise(self) -> bool:
-        pass
-    def rotateCounterclockwise(self) -> bool:
-        pass
-    def drop(self) -> bool:
-        pass
-    def getMatrix(self) -> List[List[int]]:
-        pass
-    def getPosition(self) -> Tuple[int, int]:
-        pass
-
-class J_piece(Tetramino):
-    def __init__(self, board: Board) -> None:
-        pass
-    def moveLeft(self) -> bool:
-        pass
-    def moveRight(self) -> bool:
-        pass
-    def moveDown(self) -> bool:
-        pass
-    def rotateClockwise(self) -> bool:
-        pass
-    def rotateCounterclockwise(self) -> bool:
-        pass
-    def drop(self) -> bool:
-        pass
-    def getMatrix(self) -> List[List[int]]:
-        pass
-    def getPosition(self) -> Tuple[int, int]:
-        pass
-
-class O_piece(Tetramino):
-    def __init__(self, board: Board) -> None:
-        pass
-    def moveLeft(self) -> bool:
-        pass
-    def moveRight(self) -> bool:
-        pass
-    def moveDown(self) -> bool:
-        pass
-    def rotateClockwise(self) -> bool:
-        pass
-    def rotateCounterclockwise(self) -> bool:
-        pass
-    def drop(self) -> bool:
-        pass
-    def getMatrix(self) -> List[List[int]]:
-        pass
-    def getPosition(self) -> Tuple[int, int]:
+    def getPosition(self) -> tuple[int, int]:
         pass

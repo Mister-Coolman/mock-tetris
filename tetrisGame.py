@@ -1,6 +1,6 @@
 import pygame
 from board import *
-from tetramino import *
+from tetromino import *
 import configs
 import random
 import copy
@@ -13,7 +13,7 @@ class Tetris:
     def __init__(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
-        self.colors = copy.deepcopy(configs.colorTiles)
+        self.colors = copy.copy(configs.colorTiles)
 
-    def setColorScheme(self, colors: List[pygame.image]) -> None:
+    def setColorScheme(self, colors: list[pygame.image]) -> None:
         this.colors = colors
