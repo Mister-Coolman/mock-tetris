@@ -1,17 +1,6 @@
 from board import *
 
-"""
-pieces will inherit tetramino
-position will be the top left corner
-rotate will change both matrix and position
-
-notes:
-it may be better to implement the move left/right/down in the Tetramino class
-it is highly uncertain how this works and is highly subjected to possible changes
-these classes outlined should never draw anything on the board
-"""
-
-class Tetramino:
+class Tetromino:
     """pieces are encoded as
     list[tuple(matrix, row offset, col offset)]
     
@@ -59,9 +48,11 @@ class Tetramino:
         ([[6,0],[6,6],[6,0]], 1, 0)
     ]
 
-    def __init__(self, rotations: list[tuple[list[list[int]], int, int]] board: 'Board', x: int, y: int) -> None:
+    def __init__(self, rotations: list[tuple[list[list[int]], int, int]], board: 'Board', x: int, y: int) -> None:
         self.x = x
         self.y = y
+        self.rotations = rotations
+        self.currentRotation = 0
         self.board = board
     def moveLeft(self) -> bool:
         pass
@@ -73,9 +64,9 @@ class Tetramino:
         pass
     def rotateCounterclockwise(self) -> bool:
         pass
-    def drop(self) -> bool:
-        pass
-    def getMatrix(self) -> list[list[int]]:
-        pass
+    
+    def getBoundingMatrix(self) -> list[list[int]]:
+        return self.rotations[self.currentRotation]
+
     def getPosition(self) -> tuple[int, int]:
-        pass
+        return x, y
