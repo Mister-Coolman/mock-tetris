@@ -23,4 +23,3 @@ class Board:
     
   def place(self, piece: 'Tetramino'):
     pass
-    
