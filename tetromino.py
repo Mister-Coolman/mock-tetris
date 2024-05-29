@@ -1,12 +1,19 @@
-import pygame
+import board
+
+"""
+pieces will inherit tetramino
+position will be the top left corner
+rotate will change both matrix and position
+
+notes:
+it may be better to implement the move left/right/down in the Tetramino class
+it is highly uncertain how this works and is highly subjected to possible changes
+these classes outlined should never draw anything on the board
+"""
 
 class Tetramino:
-    def __init__(self):
-        self.x = 5
-        self.y = idk
-    def __init__(self, x: int, y: int):
-        self.x = x
-        self.y = y
+    def __init__(self, board: Board) -> None:
+        pass
     def moveLeft(self) -> bool:
         pass
     def moveRight(self) -> bool:
@@ -17,7 +24,129 @@ class Tetramino:
         pass
     def rotateCounterclockwise(self) -> bool:
         pass
-    def draw(self):
+    def drop(self) -> bool:
         pass
-    def drop(self):
+    def getMatrix(self) -> List[List[int]]:
+        pass
+    def getPosition(self) -> Tuple[int, int]:
+        pass
+
+class I_piece(Tetramino):
+        def __init__(self, board: Board) -> None:
+        pass
+    def moveLeft(self) -> bool:
+        pass
+    def moveRight(self) -> bool:
+        pass
+    def moveDown(self) -> bool:
+        pass
+    def rotateClockwise(self) -> bool:
+        pass
+    def rotateCounterclockwise(self) -> bool:
+        pass
+    def drop(self) -> bool:
+        pass
+    def getMatrix(self) -> List[List[int]]:
+        pass
+    def getPosition(self) -> Tuple[int, int]:
+        pass
+
+class S_piece(Tetramino):
+    def __init__(self, board: Board) -> None:
+        pass
+    def moveLeft(self) -> bool:
+        pass
+    def moveRight(self) -> bool:
+        pass
+    def moveDown(self) -> bool:
+        pass
+    def rotateClockwise(self) -> bool:
+        pass
+    def rotateCounterclockwise(self) -> bool:
+        pass
+    def drop(self) -> bool:
+        pass
+    def getMatrix(self) -> List[List[int]]:
+        pass
+    def getPosition(self) -> Tuple[int, int]:
+        pass
+
+class Z_piece(Tetramino):
+    def __init__(self, board: Board) -> None:
+        pass
+    def moveLeft(self) -> bool:
+        pass
+    def moveRight(self) -> bool:
+        pass
+    def moveDown(self) -> bool:
+        pass
+    def rotateClockwise(self) -> bool:
+        pass
+    def rotateCounterclockwise(self) -> bool:
+        pass
+    def drop(self) -> bool:
+        pass
+    def getMatrix(self) -> List[List[int]]:
+        pass
+    def getPosition(self) -> Tuple[int, int]:
+        pass
+
+class L_piece(Tetramino):
+    def __init__(self, board: Board) -> None:
+        pass
+    def moveLeft(self) -> bool:
+        pass
+    def moveRight(self) -> bool:
+        pass
+    def moveDown(self) -> bool:
+        pass
+    def rotateClockwise(self) -> bool:
+        pass
+    def rotateCounterclockwise(self) -> bool:
+        pass
+    def drop(self) -> bool:
+        pass
+    def getMatrix(self) -> List[List[int]]:
+        pass
+    def getPosition(self) -> Tuple[int, int]:
+        pass
+
+class J_piece(Tetramino):
+    def __init__(self, board: Board) -> None:
+        pass
+    def moveLeft(self) -> bool:
+        pass
+    def moveRight(self) -> bool:
+        pass
+    def moveDown(self) -> bool:
+        pass
+    def rotateClockwise(self) -> bool:
+        pass
+    def rotateCounterclockwise(self) -> bool:
+        pass
+    def drop(self) -> bool:
+        pass
+    def getMatrix(self) -> List[List[int]]:
+        pass
+    def getPosition(self) -> Tuple[int, int]:
+        pass
+
+class O_piece(Tetramino):
+    def __init__(self, board: Board) -> None:
+        pass
+    def moveLeft(self) -> bool:
+        pass
+    def moveRight(self) -> bool:
+        pass
+    def moveDown(self) -> bool:
+        pass
+    def rotateClockwise(self) -> bool:
+        pass
+    def rotateCounterclockwise(self) -> bool:
+        pass
+    def drop(self) -> bool:
+        pass
+    def getMatrix(self) -> List[List[int]]:
+        pass
+    def getPosition(self) -> Tuple[int, int]:
         pass
