@@ -2,9 +2,7 @@ import pygame
 import tetramino
 
 class Board:
-  def __init__(self, x: int, y: int, rows: int, cols: int) -> None:
-    self.x = x
-    self.y = y
+  def __init__(self, rows: int, cols: int) -> None:
     self.rows = rows
     self.cols = cols
     self.board = [[0]*cols for i in range(rows)]
@@ -23,7 +21,6 @@ class Board:
         count += 1
     return count
     
-  def draw(self) -> None:
-    
-  def draw(self, piece: Tetramino) -> None:
+  def place(self, piece: Tetramino):
+    pass
     
