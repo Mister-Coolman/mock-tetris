@@ -21,10 +21,22 @@ class Board:
                 count += 1
         return count
     
+    def validatePlacement(self, piece: 'Tetromino') -> bool:
+        row, col = piece.getPosition()
+        matrix = piece.getBoundingMatrix()
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j] and self.board[row+i][col+j]:
+                    return False
+        return True
+
     def place(self, piece: 'Tetromino') -> None:
-        col, row = piece.getPosition()
+        row, col = piece.getPosition()
         matrix = piece.getBoundingMatrix()
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
                 if matrix[i][j]:
                     self.board[row+i][col+j] = matrix[i][j]
+
+    def __repr__(self):
+        return "\n".join(" ".join(i) for i in board)

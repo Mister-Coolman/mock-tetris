@@ -39,7 +39,7 @@ class Tetris:
         self.piece = generateRandomPiece(self.board)
 
     def setColorScheme(self, colors: list[pygame.image]) -> None:
-        this.colors = colors
+        self.colors = colors
     
     def update(self) -> None:
         pass

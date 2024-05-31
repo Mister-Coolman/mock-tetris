@@ -48,20 +48,43 @@ class Tetromino:
         ([[6,0],[6,6],[6,0]], 1, 0)
     ]
 
-    def __init__(self, rotations: list[tuple[list[list[int]], int, int]], board: 'Board', x: int, y: int) -> None:
-        self.x = x
-        self.y = y
+    def __init__(self, rotations: list[tuple[list[list[int]], int, int]], board: 'Board', row: int, col: int) -> None:
+        self.row = col
+        self.col = col
         self.rotations = rotations
         self.currentRotation = 0
         self.board = board
+    
     def moveLeft(self) -> bool:
-        pass
+        if self.col == 0:
+            return False
+        self.col -= 1
+        if not self.board.validatePlacement(self):
+            self.col += 1
+            return False
+        return True
+    
     def moveRight(self) -> bool:
-        pass
+        if self.col + len(self.getBoundingMatrix()[0]) >= len(self.board[0]):
+            return False
+        self.col += 1
+        if not self.board.validatePlacement(self):
+            self.col -= 1
+            return False
+        return True
+    
     def moveDown(self) -> bool:
-        pass
+        if self.row + len(self.getBoundingMatrix()) >= len(self.board)-1:
+            return False
+        self.row -= 1
+        if not self.board.validatePlacement(self):
+            self.row += 1
+            return False
+        return True
+    
     def rotateClockwise(self) -> bool:
         pass
+    
     def rotateCounterclockwise(self) -> bool:
         pass
     
@@ -69,4 +92,4 @@ class Tetromino:
         return self.rotations[self.currentRotation]
 
     def getPosition(self) -> tuple[int, int]:
-        return x, y
+        return row, col
