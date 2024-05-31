@@ -65,7 +65,7 @@ class Tetromino:
         return True
     
     def moveRight(self) -> bool:
-        if self.col + len(self.getBoundingMatrix()[0]) >= len(self.board[0]):
+        if self.col + len(self.getBoundingMatrix()[0]) >= len(self.board.board[0]):
             return False
         self.col += 1
         if not self.board.validatePlacement(self):
@@ -74,7 +74,7 @@ class Tetromino:
         return True
     
     def moveDown(self) -> bool:
-        if self.row + len(self.getBoundingMatrix()) >= len(self.board)-1:
+        if self.row + len(self.getBoundingMatrix()) >= len(self.board.board)-1:
             return False
         self.row -= 1
         if not self.board.validatePlacement(self):
@@ -89,7 +89,10 @@ class Tetromino:
         pass
     
     def getBoundingMatrix(self) -> list[list[int]]:
-        return self.rotations[self.currentRotation]
+        return self.rotations[self.currentRotation][0]
 
     def getPosition(self) -> tuple[int, int]:
-        return row, col
+        return self.row, self.col
+
+    def __repr__(self) -> str:
+        return str(self.row) + " " + str(self.col) + "\n" + str(self.getBoundingMatrix())

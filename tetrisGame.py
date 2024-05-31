@@ -27,25 +27,39 @@ def generateRandomPiece(board: Board) -> Tetromino:
     # change 0, 0 to the center of board according to
     # piece rotations cols and board cols
     # I'm too lazy xd
-    return Tetromino(pieceRotations, 0, 0)
+    return Tetromino(pieceRotations, board, 0, 0)
 
 
 class Tetris:
-    def __init__(self, x: int, y: int, rows: int, cols: int) -> None:
+    def __init__(self, x: int, y: int, rows: int, cols: int, gravity: int) -> None:
         self.x = x
         self.y = y
         self.colors = copy.copy(configs.colorTiles)
         self.board = Board(rows, cols)
         self.piece = generateRandomPiece(self.board)
+        self.gravity = gravity
+        self.gravityCounter = 0
+        self.level = 0
+        self.score = 0
 
     def setColorScheme(self, colors: list[pygame.image]) -> None:
         self.colors = colors
     
     def update(self) -> None:
-        pass
+        self.gravityCounter += 1
+        if self.gravityCounter >= self.gravity:
+            if not self.piece.moveDown():
+                self.board.place(self.piece)
+            self.gravityCounter--
+        match (self.board.clearRows()):
+            case 1:
+                
     
     def render(self) -> None:
         pass
     
     def processKeyPresses(self, keys: tuple[bool]) -> None:
         pass
+    
+    def __repr__(self):
+        return self.board.__repr__()

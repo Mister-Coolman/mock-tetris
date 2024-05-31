@@ -39,4 +39,4 @@ class Board:
                     self.board[row+i][col+j] = matrix[i][j]
 
     def __repr__(self):
-        return "\n".join(" ".join(i) for i in board)
+        return "\n".join(" ".join(map(str, i)) for i in self.board)

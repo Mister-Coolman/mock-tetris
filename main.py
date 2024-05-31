@@ -1,4 +1,5 @@
 import pygame
+from tetrisGame import *
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -6,7 +7,14 @@ clock = pygame.time.Clock()
 running = True
 dt = 0
 
-board = [[0] * 10] * 24
+game = Tetris(0, 0, 24, 10, 5)
+
+while running:
+    print(game)
+    print(game.piece)
+    print("\n\n")
+    game.update()
+    input()
 
 '''player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
