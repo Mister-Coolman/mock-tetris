@@ -42,7 +42,7 @@ class Tetris:
         self.level = 0
         self.score = 0
 
-    def setColorScheme(self, colors: list[pygame.image]) -> None:
+    def setColorScheme(self, colors: list[pygame.Surface]) -> None:
         self.colors = colors
     
     def update(self) -> None:
@@ -50,9 +50,10 @@ class Tetris:
         if self.gravityCounter >= self.gravity:
             if not self.piece.moveDown():
                 self.board.place(self.piece)
-            self.gravityCounter--
+            self.gravityCounter = 0
         match (self.board.clearRows()):
             case 1:
+                self.score += 100 * (1+self.level) #idk?
                 
     
     def render(self) -> None:

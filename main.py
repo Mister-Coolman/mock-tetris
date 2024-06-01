@@ -1,21 +1,35 @@
 import pygame
+import button
 from tetrisGame import *
 
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+
+screen = pygame.display.set_mode((800, 720))
+
 clock = pygame.time.Clock()
 running = True
 dt = 0
 
 game = Tetris(0, 0, 24, 10, 5)
 
-while running:
-    print(game)
-    print(game.piece)
-    print("\n\n")
-    game.update()
-    input()
+playButton = button.Button(300, 500, pygame.image.load("./bmps/PlayButton.bmp"), 4)
+background = pygame.transform.scale_by(pygame.image.load("./bmps/Background.bmp"), 2.25)
 
+while running:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    screen.fill((255, 255, 255))
+    screen.blit(background, (0,0))
+    
+    if (playButton.draw(screen)):
+        print("pressed")
+        
+    pygame.display.flip()
+    
+    
 '''player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 while running:
