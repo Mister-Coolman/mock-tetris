@@ -5,15 +5,18 @@ from tetrisGame import *
 pygame.init()
 
 screen = pygame.display.set_mode((800, 720))
+pygame.display.set_caption("Tetris Game")
 
 clock = pygame.time.Clock()
 running = True
-dt = 0
+dt = 0.0
 
-game = Tetris(0, 0, 24, 10, 5)
+game = None
 
 playButton = button.Button(300, 500, pygame.image.load("./bmps/PlayButton.bmp"), 4)
 background = pygame.transform.scale_by(pygame.image.load("./bmps/Background.bmp"), 2.25)
+
+menu = "main"
 
 while running:
 
@@ -24,43 +27,32 @@ while running:
     screen.fill((255, 255, 255))
     screen.blit(background, (0,0))
     
-    if (playButton.draw(screen)):
-        print("pressed")
-        
-    pygame.display.flip()
-    
-    
-'''player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
-
-while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
-
-    pygame.draw.circle(screen, "red", player_pos, 40)
-
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
+    
+    if menu == "main":
+        if (playButton.draw(screen)):
+            menu = "tetris"
+            #makes new tetris game
+            game = Tetris(0, 0, 24, 10, 5)
+    
+    elif menu == "tetris":
+        if keys[pygame.K_ESCAPE]:
+            menu = "pause"
+            continue
+        game.update()
 
-    # flip() the display to put your work on screen
+    elif menu == "pause":
+        if keys[pygame.K_ESCAPE]:
+            menu = "tetris"
+            
+    elif menu == "settings":
+        pass
+    
+    else:
+        assert(False)
+
     pygame.display.flip()
-
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
+    
     dt = clock.tick(60) / 1000
-
+    
 pygame.quit()
-'''

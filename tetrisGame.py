@@ -61,6 +61,3 @@ class Tetris:
     
     def processKeyPresses(self, keys: tuple[bool]) -> None:
         pass
-    
-    def __repr__(self):
-        return self.board.__repr__()

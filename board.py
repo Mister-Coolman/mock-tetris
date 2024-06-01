@@ -37,6 +37,3 @@ class Board:
             for j in range(len(matrix[0])):
                 if matrix[i][j]:
                     self.board[row+i][col+j] = matrix[i][j]
-
-    def __repr__(self):
-        return "\n".join(" ".join(map(str, i)) for i in self.board)
