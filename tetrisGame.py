@@ -11,7 +11,7 @@ This will be the object created for an instance of the game
 
 def generateRandomPiece(board: Board) -> Tetromino:
     pieceRotations = None
-    match random.randint(0,6):
+    match random.randint(0,5):
         case 0:
             pieceRotations = Tetromino.I_pieceRotations
         case 1:
@@ -34,13 +34,17 @@ class Tetris:
     def __init__(self, x: int, y: int, rows: int, cols: int, gravity: int) -> None:
         self.x = x
         self.y = y
-        self.colors = copy.copy(configs.colorTiles)
+        self.colors = [pygame.transform.scale_by(i, 1.75) for i in configs.colorTiles]
         self.board = Board(rows, cols)
+        self.rows = rows
+        self.cols = cols
         self.piece = generateRandomPiece(self.board)
+        self.next = generateRandomPiece(self.board)
         self.gravity = gravity
         self.gravityCounter = 0
         self.level = 0
         self.score = 0
+        self.gameEnd = False
 
     def setColorScheme(self, colors: list[pygame.Surface]) -> None:
         self.colors = colors
@@ -50,14 +54,30 @@ class Tetris:
         if self.gravityCounter >= self.gravity:
             if not self.piece.moveDown():
                 self.board.place(self.piece)
+                self.piece = self.next
+                self.next = generateRandomPiece(self.board)
+                if not self.board.validatePlacement(self.piece):
+                    self.gameEnd = True
             self.gravityCounter = 0
         match (self.board.clearRows()):
             case 1:
                 self.score += 100 * (1+self.level) #idk?
                 
     
-    def render(self) -> None:
-        pass
+    def render(self, surface: pygame.Surface) -> None:
+        pygame.draw.rect(surface, (127,127,127), pygame.Rect((self.x, self.y, (self.cols+1) * 28, (self.rows + 1) * 28)))
+        pygame.draw.rect(surface, (0,0,0), pygame.Rect((self.x+14, self.y+14, (self.cols) * 28, (self.rows) * 28)))
+        for i in range(self.rows):
+            for j in range(self.cols):
+                if self.board.board[i][j]:
+                    surface.blit(self.colors[self.board.board[i][j]-1], (self.x+14+28*j, self.y+14+28*i))
     
+        row, col = self.piece.getPosition()
+        matrix = self.piece.getBoundingMatrix()
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j]:
+                    surface.blit(self.colors[matrix[i][j]-1], (self.x+14+28*(j+col), self.y+14+28*(i+row)))
+        
     def processKeyPresses(self, keys: tuple[bool]) -> None:
         pass

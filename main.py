@@ -41,7 +41,7 @@ while running:
         if playButton.draw(screen):
             menu = "tetris"
             #makes new tetris game
-            game = Tetris(0, 0, 24, 10, 5)
+            game = Tetris(225, 50, 20, 10, 5)
         elif settingsButton.draw(screen):
             menu = "settings"
     
@@ -52,7 +52,10 @@ while running:
         if pauseButton.draw(screen):
             menu = "pause"
             continue
-        game.update()
+        if not game.gameEnd:
+            game.update()
+
+        game.render(screen)
 
     elif menu == "pause":
         #if keys[pygame.K_ESCAPE]:
