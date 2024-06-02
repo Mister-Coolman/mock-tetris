@@ -52,6 +52,18 @@ while running:
         if pauseButton.draw(screen):
             menu = "pause"
             continue
+        
+        if keys[pygame.K_w]:
+            game.piece.rotateClockwise()
+        if keys[pygame.K_s]:
+            game.piece.rotateCounterclockwise()
+        if keys[pygame.K_a]:
+            game.piece.moveLeft()
+        if keys[pygame.K_d]:
+            game.piece.moveRight()
+        if keys[pygame.K_SPACE]:
+            game.piece.moveDown()
+        
         if not game.gameEnd:
             game.update()
 
