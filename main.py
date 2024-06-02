@@ -13,8 +13,15 @@ dt = 0.0
 
 game = None
 
-playButton = button.Button(300, 500, pygame.image.load("./bmps/PlayButton.bmp"), 4)
+playButton = button.Button(300, 350, pygame.image.load("./bmps/PlayButton.bmp"), 4)
+settingsButton = button.Button(300, 500, pygame.image.load("./bmps/SettingsButton.bmp"), 4)
+exitButton = button.Button(300, 500, pygame.image.load("./bmps/ExitButton.bmp"), 4)
+backButton = button.Button(300, 150, pygame.image.load("./bmps/BackButton.bmp"), 4)
+pauseButton = button.Button(25, 25, pygame.image.load("./bmps/PauseButton.bmp"), 3)
 background = pygame.transform.scale_by(pygame.image.load("./bmps/Background.bmp"), 2.25)
+logo = pygame.image.load("./bmps/Logo.bmp")
+logo = pygame.transform.scale_by(logo, 8)
+logo.set_colorkey((0,0,0))
 
 menu = "main"
 
@@ -30,26 +37,38 @@ while running:
     keys = pygame.key.get_pressed()
     
     if menu == "main":
-        if (playButton.draw(screen)):
+        screen.blit(logo, (136, 100))
+        if playButton.draw(screen):
             menu = "tetris"
             #makes new tetris game
             game = Tetris(0, 0, 24, 10, 5)
+        elif settingsButton.draw(screen):
+            menu = "settings"
     
     elif menu == "tetris":
-        if keys[pygame.K_ESCAPE]:
+        #if keys[pygame.K_ESCAPE]:
+        #    menu = "pause"
+        #    continue
+        if pauseButton.draw(screen):
             menu = "pause"
             continue
         game.update()
 
     elif menu == "pause":
-        if keys[pygame.K_ESCAPE]:
+        #if keys[pygame.K_ESCAPE]:
+        #    menu = "tetris"
+        if exitButton.draw(screen):
+            menu = "main"
+            game = None
+        elif backButton.draw(screen):
             menu = "tetris"
             
     elif menu == "settings":
-        pass
+        if keys[pygame.K_ESCAPE] or backButton.draw(screen):
+            menu = "main"
     
     else:
-        assert(False)
+        assert False
 
     pygame.display.flip()
     
