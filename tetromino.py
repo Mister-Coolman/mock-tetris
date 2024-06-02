@@ -74,7 +74,7 @@ class Tetromino:
         return True
     
     def moveDown(self) -> bool:
-        if self.row + len(self.getBoundingMatrix()) >= len(self.board.board)-1:
+        if self.row + len(self.getBoundingMatrix()) >= len(self.board.board):
             return False
         self.row += 1
         if not self.board.validatePlacement(self):

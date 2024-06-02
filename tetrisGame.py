@@ -71,7 +71,6 @@ class Tetris:
             for j in range(self.cols):
                 if self.board.board[i][j]:
                     surface.blit(self.colors[self.board.board[i][j]-1], (self.x+14+28*j, self.y+14+28*i))
-    
         row, col = self.piece.getPosition()
         matrix = self.piece.getBoundingMatrix()
         for i in range(len(matrix)):
