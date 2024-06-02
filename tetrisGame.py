@@ -11,7 +11,7 @@ This will be the object created for an instance of the game
 
 def generateRandomPiece(board: Board) -> Tetromino:
     pieceRotations = None
-    match random.randint(0,5):
+    match random.randint(0,6):
         case 0:
             pieceRotations = Tetromino.I_pieceRotations
         case 1:
@@ -24,6 +24,8 @@ def generateRandomPiece(board: Board) -> Tetromino:
             pieceRotations = Tetromino.S_pieceRotations
         case 5:
             pieceRotations = Tetromino.T_pieceRotations
+        case 6:
+            pieceRotations = Tetromino.O_pieceRotations
     # change 0, 0 to the center of board according to
     # piece rotations cols and board cols
     # I'm too lazy xd

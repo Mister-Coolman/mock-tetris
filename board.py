@@ -1,5 +1,6 @@
 import pygame
 from tetromino import *
+import os
 
 class Board:
     def __init__(self, rows: int, cols: int) -> None:
@@ -16,8 +17,8 @@ class Board:
         count = 0
         for row in self.board:
             if all(row):
-                del row
-                self.board = ([0] * self.cols) + self.board
+                self.board.remove(row)
+                self.board = [[0] * self.cols] + self.board
                 count += 1
         return count
     

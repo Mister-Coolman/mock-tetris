@@ -2,6 +2,7 @@ import pygame
 
 colorTiles = [
   pygame.image.load("./bmps/Blue.bmp"),
+  pygame.image.load("./bmps/Red.bmp"),
   pygame.image.load("./bmps/Cyan.bmp"),
   pygame.image.load("./bmps/Green.bmp"),
   pygame.image.load("./bmps/Magenta.bmp"),

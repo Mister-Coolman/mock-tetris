@@ -47,6 +47,9 @@ class Tetromino:
         ([[0,6,0],[6,6,6]], 0, 0),
         ([[6,0],[6,6],[6,0]], 1, 0)
     ]
+    O_pieceRotations = [
+        ([[7,7],[7,7]], 0, 0)
+    ]
 
     def __init__(self, rotations: list[tuple[list[list[int]], int, int]], board: 'Board', row: int, col: int) -> None:
         self.row = col
