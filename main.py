@@ -14,7 +14,8 @@ dt = 0.0
 lastcalled = [0] * 6
 
 FALL = pygame.USEREVENT + 1
-pygame.time.set_timer(FALL, 150)
+
+pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (1)) * 500))
 
 game = None
 
@@ -38,7 +39,8 @@ while running:
         if menu == "tetris":
             if not game.gameEnd:
                 if event.type == FALL:
-                    game.update()
+                    if (game.update() == 1):
+                        pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500))
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         menu = "pause"
@@ -67,6 +69,8 @@ while running:
                         if pygame.time.get_ticks() - lastcalled[5] > 100:
                             while game.piece.moveDown():
                                 pass
+                            if (game.update() == 1):
+                                pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500))
                             lastcalled[5] = pygame.time.get_ticks()
             
     screen.fill((255, 255, 255))

@@ -46,12 +46,13 @@ class Tetris:
         self.gravityCounter = 0
         self.level = 0
         self.score = 0
+        self.rowsCleared = 0
         self.gameEnd = False
 
     def setColorScheme(self, colors: list[pygame.Surface]) -> None:
         self.colors = colors
     
-    def update(self) -> None:
+    def update(self) -> int:
         self.gravityCounter += 1
         if self.gravityCounter >= self.gravity:
             if not self.piece.moveDown():
@@ -61,9 +62,15 @@ class Tetris:
                 if not self.board.validatePlacement(self.piece):
                     self.gameEnd = True
             self.gravityCounter = 0
-        match (self.board.clearRows()):
+        rowsClear = self.board.clearRows()
+        match (rowsClear):
             case 1:
                 self.score += 100 * (1+self.level) #idk?
+        self.rowsCleared += rowsClear
+        if (self.rowsCleared // 10) > self.level:
+            self.level = self.rowsCleared // 10
+            return 1
+        return 0
                 
     
     def render(self, surface: pygame.Surface) -> None:
