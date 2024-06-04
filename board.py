@@ -24,6 +24,8 @@ class Board:
     
     def validatePlacement(self, piece: 'Tetromino') -> bool:
         row, col = piece.getPosition()
+        if row < 0 or col < 0:
+            return False
         matrix = piece.getBoundingMatrix()
         try:
             for i in range(len(matrix)):

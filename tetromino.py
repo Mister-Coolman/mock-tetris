@@ -86,24 +86,40 @@ class Tetromino:
         return True
     
     def rotateClockwise(self) -> bool:
+        self.col -= self.rotations[self.currentRotation][1]
+        self.row -= self.rotations[self.currentRotation][2]
         self.currentRotation += 1
         if self.currentRotation >= len(self.rotations):
             self.currentRotation = 0
+        self.col += self.rotations[self.currentRotation][1]
+        self.row += self.rotations[self.currentRotation][2]
         if not self.board.validatePlacement(self):
+            self.col -= self.rotations[self.currentRotation][1]
+            self.row -= self.rotations[self.currentRotation][2]
             self.currentRotation -= 1
             if self.currentRotation < 0:
                 self.currentRotation = len(self.rotations) - 1
+            self.col += self.rotations[self.currentRotation][1]
+            self.row += self.rotations[self.currentRotation][2]
             return False
         return True
     
     def rotateCounterclockwise(self) -> bool:
+        self.col -= self.rotations[self.currentRotation][1]
+        self.row -= self.rotations[self.currentRotation][2]
         self.currentRotation -= 1
         if self.currentRotation < 0:
             self.currentRotation = len(self.rotations) - 1
+        self.col += self.rotations[self.currentRotation][1]
+        self.row += self.rotations[self.currentRotation][2]
         if not self.board.validatePlacement(self):
+            self.col -= self.rotations[self.currentRotation][1]
+            self.row -= self.rotations[self.currentRotation][2]
             self.currentRotation += 1
             if self.currentRotation >= len(self.rotations):
                 self.currentRotation = 0
+            self.col += self.rotations[self.currentRotation][1]
+            self.row += self.rotations[self.currentRotation][2]
             return False
         return True
     
