@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 running = True
 dt = 0.0
 
-lastcalled = [0] * 5
+lastcalled = [0] * 6
 
 FALL = pygame.USEREVENT + 1
 pygame.time.set_timer(FALL, 150)
@@ -63,6 +63,11 @@ while running:
                         if pygame.time.get_ticks() - lastcalled[4] > 20:
                             game.piece.moveDown()
                             lastcalled[4] = pygame.time.get_ticks()
+                    if event.key == pygame.K_DOWN:
+                        if pygame.time.get_ticks() - lastcalled[5] > 100:
+                            while game.piece.moveDown():
+                                pass
+                            lastcalled[5] = pygame.time.get_ticks()
             
     screen.fill((255, 255, 255))
     screen.blit(background, (0,0))
