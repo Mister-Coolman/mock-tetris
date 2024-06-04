@@ -74,6 +74,7 @@ class Tetris:
                 
     
     def render(self, surface: pygame.Surface) -> None:
+        #draws the board
         pygame.draw.rect(surface, (127,127,127), pygame.Rect((self.x, self.y, (self.cols+1) * 28, (self.rows + 1) * 28)))
         pygame.draw.rect(surface, (0,0,0), pygame.Rect((self.x+14, self.y+14, (self.cols) * 28, (self.rows) * 28)))
         for i in range(self.rows):
@@ -86,6 +87,15 @@ class Tetris:
             for j in range(len(matrix[0])):
                 if matrix[i][j]:
                     surface.blit(self.colors[matrix[i][j]-1], (self.x+14+28*(j+col), self.y+14+28*(i+row)))
+        #next piece
+        
+        pygame.draw.rect(surface, (127,127,127), pygame.Rect((self.x+(self.cols+1)*28, self.y+self.rows*28/3, 28*6, 28*6)))
+        pygame.draw.rect(surface, (0,0,0), pygame.Rect((self.x+(self.cols+1)*28+14, self.y+self.rows*28/3+14, 28*5, 28*5)))
+        matrix = self.next.getBoundingMatrix()
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j]:
+                    surface.blit(self.colors[matrix[i][j]-1], (self.x+(self.cols+2+j)*28, self.y+self.rows*28/3 + (i+1)*28))
         
     def processKeyPresses(self, keys: tuple[bool]) -> None:
         pass
