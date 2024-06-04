@@ -11,6 +11,11 @@ clock = pygame.time.Clock()
 running = True
 dt = 0.0
 
+lastcalled = [0] * 5
+
+FALL = pygame.USEREVENT + 1
+pygame.time.set_timer(FALL, 150)
+
 game = None
 
 playButton = button.Button(300, 350, pygame.image.load("./bmps/PlayButton.bmp"), 4)
@@ -30,10 +35,39 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    
+        if menu == "tetris":
+            if not game.gameEnd:
+                if event.type == FALL:
+                    game.update()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        menu = "pause"
+                        continue
+                    if event.key == pygame.K_w:
+                        if pygame.time.get_ticks() - lastcalled[0] > 150:
+                            game.piece.rotateClockwise()
+                            lastcalled[0] = pygame.time.get_ticks()
+                    if event.key == pygame.K_s:
+                        if pygame.time.get_ticks() - lastcalled[1] > 150:
+                            game.piece.rotateCounterclockwise()
+                            lastcalled[1] = pygame.time.get_ticks()
+                    if event.key == pygame.K_a:
+                        if pygame.time.get_ticks() - lastcalled[2] > 150:
+                            game.piece.moveLeft()
+                            lastcalled[2] = pygame.time.get_ticks()
+                    if event.key == pygame.K_d:
+                        if pygame.time.get_ticks() - lastcalled[3] > 150:
+                            game.piece.moveRight()
+                            lastcalled[3] = pygame.time.get_ticks()
+                    if event.key == pygame.K_SPACE:
+                        if pygame.time.get_ticks() - lastcalled[4] > 20:
+                            game.piece.moveDown()
+                            lastcalled[4] = pygame.time.get_ticks()
+            
     screen.fill((255, 255, 255))
     screen.blit(background, (0,0))
-    
+
+    pygame.key.set_repeat(1, 1)
     keys = pygame.key.get_pressed()
     
     if menu == "main":
@@ -51,21 +85,7 @@ while running:
         #    continue
         if pauseButton.draw(screen):
             menu = "pause"
-            continue
-        
-        if keys[pygame.K_w]:
-            game.piece.rotateClockwise()
-        if keys[pygame.K_s]:
-            game.piece.rotateCounterclockwise()
-        if keys[pygame.K_a]:
-            game.piece.moveLeft()
-        if keys[pygame.K_d]:
-            game.piece.moveRight()
-        if keys[pygame.K_SPACE]:
-            game.piece.moveDown()
-        
-        if not game.gameEnd:
-            game.update()
+            continue    
 
         game.render(screen)
 

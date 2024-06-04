@@ -25,10 +25,13 @@ class Board:
     def validatePlacement(self, piece: 'Tetromino') -> bool:
         row, col = piece.getPosition()
         matrix = piece.getBoundingMatrix()
-        for i in range(len(matrix)):
-            for j in range(len(matrix[0])):
-                if matrix[i][j] and self.board[row+i][col+j]:
-                    return False
+        try:
+            for i in range(len(matrix)):
+                for j in range(len(matrix[0])):
+                    if matrix[i][j] and self.board[row+i][col+j]:
+                        return False
+        except:
+            return False
         return True
 
     def place(self, piece: 'Tetromino') -> None:

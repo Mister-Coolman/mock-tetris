@@ -86,10 +86,26 @@ class Tetromino:
         return True
     
     def rotateClockwise(self) -> bool:
-        pass
+        self.currentRotation += 1
+        if self.currentRotation >= len(self.rotations):
+            self.currentRotation = 0
+        if not self.board.validatePlacement(self):
+            self.currentRotation -= 1
+            if self.currentRotation < 0:
+                self.currentRotation = len(self.rotations) - 1
+            return False
+        return True
     
     def rotateCounterclockwise(self) -> bool:
-        pass
+        self.currentRotation -= 1
+        if self.currentRotation < 0:
+            self.currentRotation = len(self.rotations) - 1
+        if not self.board.validatePlacement(self):
+            self.currentRotation += 1
+            if self.currentRotation >= len(self.rotations):
+                self.currentRotation = 0
+            return False
+        return True
     
     def getBoundingMatrix(self) -> list[list[int]]:
         return self.rotations[self.currentRotation][0]
