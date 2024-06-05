@@ -11,11 +11,17 @@ clock = pygame.time.Clock()
 running = True
 dt = 0.0
 
-lastcalled = [0] * 6
+#lastcalled = [0] * 6
+
+das_start = 150
+das_repeat = 50
+msHeld = [0,0,0,0,0,-int(1e11)] # wait a couple years
+tetris_controls = [pygame.K_w,pygame.K_s,pygame.K_a,pygame.K_d,pygame.K_SPACE,pygame.K_DOWN]
+tetris_commands: list[callable]
 
 FALL = pygame.USEREVENT + 1
 
-pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (1)) * 500))
+pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (1)) * 500*5))
 
 game = None
 
@@ -31,6 +37,7 @@ logo.set_colorkey((0,0,0))
 
 menu = "main"
 
+
 while running:
 
     for event in pygame.event.get():
@@ -41,6 +48,7 @@ while running:
                 if event.type == FALL:
                     if (game.update() == 1):
                         pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500*5))
+                """       
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         menu = "pause"
@@ -72,6 +80,7 @@ while running:
                             if (game.update() == 1):
                                 pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500*5))
                             lastcalled[5] = pygame.time.get_ticks()
+                            """
             
     screen.fill((255, 255, 255))
     screen.blit(background, (0,0))
@@ -85,13 +94,41 @@ while running:
             menu = "tetris"
             #makes new tetris game
             game = Tetris(225, 50, 20, 10)
+            def harddrop():
+                while game.piece.moveDown():
+                    pass
+                if game.update() == 1:
+                    pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500*5))
+                    
+            tetris_commands = [
+                (lambda : game.piece.rotateClockwise()),
+                (lambda : game.piece.rotateCounterclockwise()),
+                (lambda : game.piece.moveLeft()),
+                (lambda : game.piece.moveRight()),
+                (lambda : game.piece.moveDown()),
+                harddrop
+            ]
         elif settingsButton.draw(screen):
             menu = "settings"
-    
     elif menu == "tetris":
         #if keys[pygame.K_ESCAPE]:
         #    menu = "pause"
         #    continue
+        if not game.gameEnd:
+            #process keys
+            current_time = pygame.time.get_ticks()
+            for i in range(len(tetris_controls)):
+                if keys[tetris_controls[i]]:
+                    if msHeld[i]:
+                        msHeld[i] += dt*1000
+                        if msHeld[i] >= das_start:
+                            tetris_commands[i]()
+                            msHeld[i] = das_start - das_repeat
+                    else:
+                        tetris_commands[i]()
+                        msHeld[i] = dt*1000
+                else:
+                    msHeld[i] = 0
         if pauseButton.draw(screen):
             menu = "pause"
             continue    

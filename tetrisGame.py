@@ -34,7 +34,7 @@ def generateRandomPiece(board: Board) -> Tetromino:
 
 
 class Tetris:
-    score_font = pygame.font.SysFont("Times New Roman", 30)
+    font = pygame.font.SysFont("Times New Roman", 30)
     def __init__(self, x: int, y: int, rows: int, cols: int) -> None:
         self.x = x
         self.y = y
@@ -62,7 +62,13 @@ class Tetris:
         rowsClear = self.board.clearRows()
         match (rowsClear):
             case 1:
-                self.score += 100 * (1+self.level) #idk?
+                self.score += 40*(self.level+1)
+            case 2:
+                self.score += 100*(self.level+1)
+            case 3:
+                self.score += 300*(self.level+1)
+            case 4:
+                self.score += 1200*(self.level+1)
         self.rowsCleared += rowsClear
         if (self.rowsCleared // 10) > self.level:
             self.level = self.rowsCleared // 10
@@ -98,7 +104,7 @@ class Tetris:
         
         pygame.draw.rect(surface, (127,127,127), pygame.Rect((self.x+(self.cols+1)*28, self.y, 200, 78)))
         pygame.draw.rect(surface, (0,0,0), pygame.Rect((self.x+(self.cols+1)*28+14, self.y+14, 200-28, 78-28)))
-        text = Tetris.score_font.render(str(self.score), False, (255,255,255))
+        text = Tetris.font.render(str(self.score), False, (255,255,255))
         surface.blit(text, (self.x+(self.cols+1)*28+14+5, self.y+14+5))
 
         

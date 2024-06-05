@@ -15,7 +15,7 @@ class Board:
     
     def clearRows(self) -> int:
         count = 0
-        for row in self.board:
+        for row in reversed(self.board):
             if all(row):
                 self.board.remove(row)
                 self.board = [[0] * self.cols] + self.board
