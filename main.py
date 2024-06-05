@@ -15,7 +15,7 @@ dt = 0.0
 
 das_start = 150
 das_repeat = 50
-msHeld = [0,0,0,0,0,-int(1e11)] # wait a couple years
+msHeld = [0,0,0,0,0,0]
 tetris_controls = [pygame.K_w,pygame.K_s,pygame.K_a,pygame.K_d,pygame.K_SPACE,pygame.K_DOWN]
 tetris_commands: list[callable]
 
@@ -94,6 +94,7 @@ while running:
             menu = "tetris"
             #makes new tetris game
             game = Tetris(225, 50, 20, 10)
+            
             def harddrop():
                 while game.piece.moveDown():
                     pass
@@ -111,9 +112,10 @@ while running:
         elif settingsButton.draw(screen):
             menu = "settings"
     elif menu == "tetris":
-        #if keys[pygame.K_ESCAPE]:
-        #    menu = "pause"
-        #    continue
+        if pauseButton.draw(screen):
+            menu = "pause"
+            continue
+            
         if not game.gameEnd:
             #process keys
             current_time = pygame.time.get_ticks()
@@ -129,10 +131,12 @@ while running:
                         msHeld[i] = dt*1000
                 else:
                     msHeld[i] = 0
-        if pauseButton.draw(screen):
-            menu = "pause"
-            continue    
-
+        else:
+            #game ended
+            if game.endAnimation > 0:
+                game.board.board[game.endAnimation//10] = [game.endAnimation//10%(len(game.colors)-1)+1] * game.cols
+                game.endAnimation -= 1
+        
         game.render(screen)
 
     elif menu == "pause":

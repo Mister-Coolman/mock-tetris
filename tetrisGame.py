@@ -48,6 +48,7 @@ class Tetris:
         self.score = 0
         self.rowsCleared = 0
         self.gameEnd = False
+        self.endAnimation = self.rows * 10 - 1
 
     def setColorScheme(self, colors: list[pygame.Surface]) -> None:
         self.colors = colors
@@ -90,10 +91,16 @@ class Tetris:
             for j in range(len(matrix[0])):
                 if matrix[i][j]:
                     surface.blit(self.colors[matrix[i][j]-1], (self.x+14+28*(j+col), self.y+14+28*(i+row)))
+        if self.gameEnd:
+            for i in range(self.rows):
+                for j in range(self.cols):
+                    if self.board.board[i][j]:
+                        surface.blit(self.colors[self.board.board[i][j]-1], (self.x+14+28*j, self.y+14+28*i))
+     
         #next piece
         
-        pygame.draw.rect(surface, (127,127,127), pygame.Rect((self.x+(self.cols+1)*28, self.y+self.rows*28/3, 28*6, 28*6)))
-        pygame.draw.rect(surface, (0,0,0), pygame.Rect((self.x+(self.cols+1)*28+14, self.y+self.rows*28/3+14, 28*5, 28*5)))
+        pygame.draw.rect(surface, (127,127,127), pygame.Rect((self.x+(self.cols+1)*28, self.y+self.rows*28/3, 28*6, 28*4)))
+        pygame.draw.rect(surface, (0,0,0), pygame.Rect((self.x+(self.cols+1)*28+14, self.y+self.rows*28/3+14, 28*5, 28*3)))
         matrix = self.next.getBoundingMatrix()
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
@@ -106,7 +113,3 @@ class Tetris:
         pygame.draw.rect(surface, (0,0,0), pygame.Rect((self.x+(self.cols+1)*28+14, self.y+14, 200-28, 78-28)))
         text = Tetris.font.render(str(self.score), False, (255,255,255))
         surface.blit(text, (self.x+(self.cols+1)*28+14+5, self.y+14+5))
-
-        
-    def processKeyPresses(self, keys: tuple[bool]) -> None:
-        pass
