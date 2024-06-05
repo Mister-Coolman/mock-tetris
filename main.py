@@ -40,7 +40,7 @@ while running:
             if not game.gameEnd:
                 if event.type == FALL:
                     if (game.update() == 1):
-                        pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500))
+                        pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500*5))
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         menu = "pause"
@@ -70,7 +70,7 @@ while running:
                             while game.piece.moveDown():
                                 pass
                             if (game.update() == 1):
-                                pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500))
+                                pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (game.level + 1)) * 500*5))
                             lastcalled[5] = pygame.time.get_ticks()
             
     screen.fill((255, 255, 255))
@@ -84,7 +84,7 @@ while running:
         if playButton.draw(screen):
             menu = "tetris"
             #makes new tetris game
-            game = Tetris(225, 50, 20, 10, 5)
+            game = Tetris(225, 50, 20, 10)
         elif settingsButton.draw(screen):
             menu = "settings"
     

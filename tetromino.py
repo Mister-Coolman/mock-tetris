@@ -52,7 +52,7 @@ class Tetromino:
     ]
 
     def __init__(self, rotations: list[tuple[list[list[int]], int, int]], board: 'Board', row: int, col: int) -> None:
-        self.row = col
+        self.row = row
         self.col = col
         self.rotations = rotations
         self.currentRotation = 0
