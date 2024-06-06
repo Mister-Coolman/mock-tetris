@@ -114,8 +114,10 @@ while running:
                 (lambda : game.piece.moveDown()),
                 harddrop
             ]
-        elif settingsButton.draw(screen):
-            menu = "settings"
+        elif exitButton.draw(screen):
+            running = False
+            continue
+        #menu = "settings"
     elif menu == "tetris":
         if pauseButton.draw(screen):
             menu = "pause"
