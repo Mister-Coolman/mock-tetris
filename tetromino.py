@@ -93,7 +93,21 @@ class Tetromino:
             self.currentRotation = 0
         self.col += self.rotations[self.currentRotation][1]
         self.row += self.rotations[self.currentRotation][2]
+        dx = 0
+        dy = 0
+        if self.col < 0:
+            dx = self.col
+            self.col -= dx
+        if self.row < 0:
+            dy = self.row
+            self.row -= dy
+        matrix = self.getBoundingMatrix()
+        if self.col + len(matrix[0]) >= len(self.board.board[0]) -1:
+            dx = self.col + len(matrix[0]) - len(self.board.board[0])
+            self.col -= dx
         if not self.board.validatePlacement(self):
+            self.col += dx
+            self.row += dy
             self.col -= self.rotations[self.currentRotation][1]
             self.row -= self.rotations[self.currentRotation][2]
             self.currentRotation -= 1
@@ -112,7 +126,21 @@ class Tetromino:
             self.currentRotation = len(self.rotations) - 1
         self.col += self.rotations[self.currentRotation][1]
         self.row += self.rotations[self.currentRotation][2]
+        dx = 0
+        dy = 0
+        if self.col < 0:
+            dx = self.col
+            self.col -= dx
+        if self.row < 0:
+            dy = self.row
+            self.row -= dy
+        matrix = self.getBoundingMatrix()
+        if self.col + len(matrix[0]) >= len(self.board.board[0]) -1:
+            dx = self.col + len(matrix[0]) - len(self.board.board[0])
+            self.col -= dx
         if not self.board.validatePlacement(self):
+            self.col += dx
+            self.row += dy
             self.col -= self.rotations[self.currentRotation][1]
             self.row -= self.rotations[self.currentRotation][2]
             self.currentRotation += 1

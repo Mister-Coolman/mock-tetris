@@ -16,6 +16,7 @@ dt = 0.0
 das_start = 150
 das_repeat = 50
 msHeld = [0,0,0,0,0,0]
+hasDas = [False,False,True,True,True,False]
 tetris_controls = [pygame.K_w,pygame.K_s,pygame.K_a,pygame.K_d,pygame.K_SPACE,pygame.K_DOWN]
 tetris_commands: list[callable]
 
@@ -123,7 +124,7 @@ while running:
                 if keys[tetris_controls[i]]:
                     if msHeld[i]:
                         msHeld[i] += dt*1000
-                        if msHeld[i] >= das_start:
+                        if msHeld[i] >= das_start and hasDas[i]:
                             tetris_commands[i]()
                             msHeld[i] = das_start - das_repeat
                     else:
