@@ -30,7 +30,7 @@ def generateRandomPiece(board: Board) -> Tetromino:
     # change 0, 0 to the center of board according to
     # piece rotations cols and board cols
     # I'm too lazy xd
-    return Tetromino(pieceRotations, board, 0, int(len(board.board[0])/2-len(pieceRotations[0][0][0])/2))
+    return Tetromino(pieceRotations, board, 0, int(len(board.board[0])/2-len(pieceRotations[0][0][0])/2), 0)
 
 
 class Tetris:
@@ -39,6 +39,7 @@ class Tetris:
         self.x = x
         self.y = y
         self.colors = [pygame.transform.scale_by(i, 1.75) for i in configs.colorTiles]
+        self.outlinedColors = [pygame.transform.scale_by(i, 1.75) for i in configs.outlinedTiles]
         self.board = Board(rows, cols)
         self.rows = rows
         self.cols = cols
@@ -87,6 +88,19 @@ class Tetris:
                     surface.blit(self.colors[self.board.board[i][j]-1], (self.x+14+28*j, self.y+14+28*i))
         row, col = self.piece.getPosition()
         matrix = self.piece.getBoundingMatrix()
+
+        #outlines where piece will fall
+        fallPiece = Tetromino(self.piece.rotations, self.board, row, col, self.piece.currentRotation)
+        fallRow = row
+        while fallPiece.moveDown():
+            fallRow += 1
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                if matrix[i][j]:
+                    surface.blit(self.outlinedColors[matrix[i][j]-1], (self.x+14+28*(j+col), self.y+14+28*(i+fallRow)))
+        
+        #draws the current piece
+
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
                 if matrix[i][j]:

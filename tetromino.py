@@ -51,11 +51,11 @@ class Tetromino:
         ([[7,7],[7,7]], 0, 0)
     ]
 
-    def __init__(self, rotations: list[tuple[list[list[int]], int, int]], board: 'Board', row: int, col: int) -> None:
+    def __init__(self, rotations: list[tuple[list[list[int]], int, int]], board: 'Board', row: int, col: int, currentRotation: int) -> None:
         self.row = row
         self.col = col
         self.rotations = rotations
-        self.currentRotation = 0
+        self.currentRotation = currentRotation
         self.board = board
     
     def moveLeft(self) -> bool:
