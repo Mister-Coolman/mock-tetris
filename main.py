@@ -25,6 +25,10 @@ pygame.time.set_timer(FALL, int(1 / (1 + 1.4 ** (1)) * 500*5))
 
 game = None
 
+pygame.mixer.music.load("./sounds/TetrisTheme.mp3")
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.3)
+
 playButton = button.Button(300, 350, pygame.image.load("./bmps/PlayButton.bmp"), 4)
 settingsButton = button.Button(300, 500, pygame.image.load("./bmps/SettingsButton.bmp"), 4)
 exitButton = button.Button(300, 500, pygame.image.load("./bmps/ExitButton.bmp"), 4)
